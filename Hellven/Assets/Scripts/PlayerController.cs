@@ -13,6 +13,8 @@ public class PlayerController : MonoBehaviour
     private Animator animator;
 
     public LayerMask solidLayer;
+    public LayerMask battleLayer;
+
 
     private void Awake()
     {
@@ -56,6 +58,9 @@ public class PlayerController : MonoBehaviour
         transform.position = targetPos;
 
         isMoving = false;
+
+        
+
     }
 
     private bool isWalkable(Vector3 targetPos)
