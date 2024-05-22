@@ -8,13 +8,13 @@ TagManager:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Effects
   - Water
   - UI
   - 
   - SolidObjects
   - BattleZone
-  - 
+  - Enemies
   - 
   - 
   - 
@@ -43,6 +43,9 @@ TagManager:
     locked: 0
   - name: First
     uniqueID: 1890882863
+    locked: 0
+  - name: Enemies
+    uniqueID: 4081836431
     locked: 0
   - name: Player
     uniqueID: 4258575597
