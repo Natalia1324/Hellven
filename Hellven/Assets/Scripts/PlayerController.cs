@@ -48,33 +48,26 @@ public class PlayerController : MonoBehaviour
     }
     void UpdateHealthUI()
     {
-        Debug.Log("HP is: " +  currentHP);
+        UnityEngine.Debug.Log("HP is: " +  currentHP);
         healthText.text = "HP: " + currentHP + "/" + maxHP;
     }
     private void Update()
     {
-        if (!isMoving)
+        input.x = Input.GetAxisRaw("Horizontal");
+        input.y = Input.GetAxisRaw("Vertical");
+        input.z = 0;
+
+        //Debug.Log(input.x + " " + input.y);
+
+
+        if (input != Vector3.zero)
         {
-            input.x = Input.GetAxisRaw("Horizontal");
-            input.y = Input.GetAxisRaw("Vertical");
-            input.z = 0;
+            animator.SetFloat("MoveX", input.x);
+            animator.SetFloat("MoveY", input.y);
 
-            //Debug.Log(input.x + " " + input.y);
+            acceleration = input * moveSpeed;
 
-
-            if (input != Vector3.zero)
-            {
-                animator.SetFloat("MoveX", input.x);
-                animator.SetFloat("MoveY", input.y);
-
-                acceleration = input * moveSpeed;
-
-                isMoving = true;
-            }
-            else
-            {
-                acceleration = Vector3.zero;
-            }
+            isMoving = true;
         }
         else
         {
@@ -96,12 +89,8 @@ public class PlayerController : MonoBehaviour
         if ( velocity.y < 0.02f && velocity.y > -0.02f ) velocity.y = 0;
         if ( velocity.z < 0.02f && velocity.z > -0.02f ) velocity.z = 0;
         if ( velocity == Vector3.zero ) isMoving = false;
-
-
-        var targetPos = transform.position;
-        targetPos += velocity;
-        
-        transform.position = targetPos * moveSpeed * Time.deltaTime;
+                
+        transform.position += velocity * Time.deltaTime;
 
         // if (isWalkable(targetPos)) StartCoroutine(Move(targetPos));
 
@@ -158,7 +147,7 @@ public class PlayerController : MonoBehaviour
 
     void Die()
     {
-        Debug.Log("Player died!");
+        UnityEngine.Debug.Log("Player died!");
         // Tutaj można dodać logikę śmierci gracza
     }
     public void DealDamage()
@@ -169,7 +158,7 @@ public class PlayerController : MonoBehaviour
         // Zadanie obrażeń trafionym przeciwnikom
         foreach (Collider2D enemy in hitEnemies)
         {
-            Debug.Log("Trafiono: " + enemy.name);
+            UnityEngine.Debug.Log("Trafiono: " + enemy.name);
             enemy.GetComponent<EnemyController>().TakeDamage(attackDamage);
         }
     }
