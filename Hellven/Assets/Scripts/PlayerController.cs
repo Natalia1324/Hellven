@@ -1,5 +1,7 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using TMPro;
 using UnityEngine;
 
@@ -8,8 +10,9 @@ public class PlayerController : MonoBehaviour
     public int maxHP;
     public int currentHP;
     public float moveSpeed;
+    public float damping;
 
-    private bool isMoving;
+    public bool isMoving;
     //public Transform attackPoint;
     //public float attackRange = 0.5f;
     //public LayerMask enemyLayers;
@@ -19,10 +22,13 @@ public class PlayerController : MonoBehaviour
     public int attackDamage = 10;
     public float attackDelay = 0.5f;
 
+    public Vector3 velocity;
+    public Vector3 acceleration;
+
 
     private bool isAttacking;
 
-    private Vector2 input;
+    private Vector3 input;
 
     private Animator animator;
 
@@ -51,28 +57,56 @@ public class PlayerController : MonoBehaviour
         {
             input.x = Input.GetAxisRaw("Horizontal");
             input.y = Input.GetAxisRaw("Vertical");
-            
+            input.z = 0;
+
             //Debug.Log(input.x + " " + input.y);
 
 
-            if (input != Vector2.zero)
+            if (input != Vector3.zero)
             {
                 animator.SetFloat("MoveX", input.x);
                 animator.SetFloat("MoveY", input.y);
 
-                var targetPos = transform.position;
-                targetPos.x += input.x;
-                targetPos.y += input.y;
+                acceleration = input * moveSpeed;
 
-                if (isWalkable(targetPos)) StartCoroutine(Move(targetPos));
+                isMoving = true;
+            }
+            else
+            {
+                acceleration = Vector3.zero;
             }
         }
+        else
+        {
+            acceleration = Vector3.zero;
+        }
+
         if (Input.GetKey(KeyCode.Space))
         {
             StartCoroutine(Attack());
         }
         else isAttacking = false;
+
+        //velocity = velocity * acceleration * Time.deltaTime * damping;
+        velocity.x = ( velocity.x + acceleration.x ) * damping;
+        velocity.y = ( velocity.y + acceleration.y ) * damping;
+        velocity.z = ( velocity.z + acceleration.z ) * damping;
+
+        if ( velocity.x < 0.02f && velocity.x > -0.02f ) velocity.x = 0;
+        if ( velocity.y < 0.02f && velocity.y > -0.02f ) velocity.y = 0;
+        if ( velocity.z < 0.02f && velocity.z > -0.02f ) velocity.z = 0;
+        if ( velocity == Vector3.zero ) isMoving = false;
+
+
+        var targetPos = transform.position;
+        targetPos += velocity;
+        
+        transform.position = targetPos * moveSpeed * Time.deltaTime;
+
+        // if (isWalkable(targetPos)) StartCoroutine(Move(targetPos));
+
         //Debug.Log("Attack is: "+ isAttacking);
+
         animator.SetBool("isAttacking", isAttacking);
         animator.SetBool("isMoving", isMoving);
     }
