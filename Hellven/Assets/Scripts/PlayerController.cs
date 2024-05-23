@@ -62,7 +62,7 @@ public class PlayerController : MonoBehaviour
 
                 var targetPos = transform.position;
                 targetPos.x += input.x;
-                targetPos.y += input.y;
+                targetPos.z += input.y;
 
                 if (isWalkable(targetPos)) StartCoroutine(Move(targetPos));
             }
