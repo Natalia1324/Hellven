@@ -37,9 +37,9 @@ TextureImporter:
     filterMode: 0
     aniso: 1
     mipBias: 0
-    wrapU: 1
-    wrapV: 1
-    wrapW: 1
+    wrapU: 0
+    wrapV: 0
+    wrapW: 0
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
@@ -48,7 +48,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 3.2
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -111,8 +111,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: eece5d77aaa30834c94d5f2ede91d685
-      internalID: -1517931715
+      spriteID: d5fc3f67643ed484f869feb5cc6f94a6
+      internalID: 702991488
       vertices: []
       indices: 
       edges: []
@@ -132,8 +132,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 34efe6767849a704cafaa394e62d0edd
-      internalID: -1702927950
+      spriteID: a5b57ce40e5659149ae9662645cbe996
+      internalID: 1456266963
       vertices: []
       indices: 
       edges: []
@@ -153,8 +153,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0b5fbe154be0e2a48992f92c866b9f08
-      internalID: 27007124
+      spriteID: 7cc9ad64b1bb5f4488356627284de5e8
+      internalID: -863183126
       vertices: []
       indices: 
       edges: []
@@ -174,8 +174,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: feb38590762d8514b811b72c8be9c63e
-      internalID: 1522852171
+      spriteID: 0201b33464b131a4499ade00d7afe372
+      internalID: 272602767
       vertices: []
       indices: 
       edges: []
@@ -195,8 +195,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 28ef534cc17919847b50c4190d6e0b1d
-      internalID: 899421045
+      spriteID: 06d180206ac00354aaa154d76fd25b45
+      internalID: 1948291874
       vertices: []
       indices: 
       edges: []
@@ -216,8 +216,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e35f680ba71102d438ba7d5f135d8ee6
-      internalID: 594427090
+      spriteID: 1ffc1357336705546a96f19e68fa1321
+      internalID: 1145418198
       vertices: []
       indices: 
       edges: []
@@ -237,8 +237,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0667edee97232834098b8b803f474cb0
-      internalID: 1520013218
+      spriteID: 574e08ce4ddb5ba4d8eda80394b70787
+      internalID: 542227253
       vertices: []
       indices: 
       edges: []
@@ -258,8 +258,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c3cc65963b921b245baa5f3b76fd06f3
-      internalID: -2112313687
+      spriteID: 2be19512fbb341b4480eb8d06ccf068c
+      internalID: 972443639
       vertices: []
       indices: 
       edges: []
@@ -279,8 +279,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7d5a2671e4edda04b9cd3e4245fe7c74
-      internalID: 97573862
+      spriteID: d1da1a0f82c51604187cec4855bb6b6c
+      internalID: 1746652345
       vertices: []
       indices: 
       edges: []
@@ -300,8 +300,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f51e9c87a28f6144a85ad55549cf6cd2
-      internalID: -578241929
+      spriteID: 5876e099bf4aead4ca08a2fa44b4a9a1
+      internalID: 1653761538
       vertices: []
       indices: 
       edges: []
@@ -321,8 +321,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9c44f54a2b1562a44a6a489a042334fd
-      internalID: 1242834099
+      spriteID: 2c4f3b67472839d4c801af5b494b8f10
+      internalID: 946172422
       vertices: []
       indices: 
       edges: []
@@ -342,8 +342,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 462e2a7679710e34a807828869fac2e8
-      internalID: 2084877023
+      spriteID: 1dc699e232303a247bc01ab76e2cd245
+      internalID: 1330736443
       vertices: []
       indices: 
       edges: []
@@ -363,8 +363,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e7609ecdf0092fa4d8776cbcc460911b
-      internalID: 1285785140
+      spriteID: f1acfeb8af8736048a5d2eb5fe6aa2fc
+      internalID: -1339815754
       vertices: []
       indices: 
       edges: []
@@ -384,8 +384,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 811be14997c310d41b7741ecf3a35216
-      internalID: -123305101
+      spriteID: c33fc2886950fa341b3ee6e65fc77cc6
+      internalID: 1761246578
       vertices: []
       indices: 
       edges: []
@@ -405,8 +405,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: fe10ea15ce1243b468bb456d7544caf5
-      internalID: 1561494166
+      spriteID: 403e83dcc031ba64d83a345c0abacc1a
+      internalID: 1900010865
       vertices: []
       indices: 
       edges: []
@@ -422,21 +422,21 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Heaven Base Tileset_0: -1517931715
-      Heaven Base Tileset_1: -1702927950
-      Heaven Base Tileset_10: 1242834099
-      Heaven Base Tileset_11: 2084877023
-      Heaven Base Tileset_12: 1285785140
-      Heaven Base Tileset_13: -123305101
-      Heaven Base Tileset_14: 1561494166
-      Heaven Base Tileset_2: 27007124
-      Heaven Base Tileset_3: 1522852171
-      Heaven Base Tileset_4: 899421045
-      Heaven Base Tileset_5: 594427090
-      Heaven Base Tileset_6: 1520013218
-      Heaven Base Tileset_7: -2112313687
-      Heaven Base Tileset_8: 97573862
-      Heaven Base Tileset_9: -578241929
+      Heaven Base Tileset_0: 702991488
+      Heaven Base Tileset_1: 1456266963
+      Heaven Base Tileset_10: 946172422
+      Heaven Base Tileset_11: 1330736443
+      Heaven Base Tileset_12: -1339815754
+      Heaven Base Tileset_13: 1761246578
+      Heaven Base Tileset_14: 1900010865
+      Heaven Base Tileset_2: -863183126
+      Heaven Base Tileset_3: 272602767
+      Heaven Base Tileset_4: 1948291874
+      Heaven Base Tileset_5: 1145418198
+      Heaven Base Tileset_6: 542227253
+      Heaven Base Tileset_7: 972443639
+      Heaven Base Tileset_8: 1746652345
+      Heaven Base Tileset_9: 1653761538
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
