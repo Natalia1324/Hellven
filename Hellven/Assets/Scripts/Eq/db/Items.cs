@@ -16,16 +16,21 @@ public class Item
 
     public ItemType Type { get; set; }
 
+    public int Id { get; set; }
     // Common properties that all items might have
     public string Name { get; set; }
+    public string Description { get; set; }
+    // Iloœæ
     public int Quantity { get; set; }
 
     // Constructor
-    public Item(string name, int quantity, ItemType type)
+    public Item(int Id, string name, string Description, int quantity, ItemType type)
     {
-        Name = name;
-        Quantity = quantity;
-        Type = type;
+        this.Id = Id;
+        this.Name = name;
+        this.Description = Description;
+        this.Quantity = quantity;
+        this.Type = type;
     }
 
     // Method to display item info
@@ -40,8 +45,8 @@ public class Food : Item
 {
     public int Calories { get; set; }
 
-    public Food(string name, int quantity, int calories)
-        : base(name, quantity, ItemType.Food)
+    public Food(int Id, string name, string Description, int quantity, int calories)
+        : base(Id, name, Description, quantity,  ItemType.Food)
     {
         Calories = calories;
     }
@@ -58,8 +63,8 @@ public class Weapon : Item
 {
     public int Damage { get; set; }
 
-    public Weapon(string name, int quantity, int damage)
-        : base(name, quantity, ItemType.Weapon)
+    public Weapon(int Id, string name, string Description, int quantity, int damage)
+        : base(Id, name, Description, quantity, ItemType.Weapon)
     {
         Damage = damage;
     }
@@ -76,8 +81,8 @@ public class Materials : Item
 {
     public string MaterialType { get; set; }
 
-    public Materials(string name, int quantity, string materialType)
-        : base(name, quantity, ItemType.Materials)
+    public Materials(int Id, string name, string Description, int quantity, string materialType)
+        : base(Id, name, Description, quantity, ItemType.Materials)
     {
         MaterialType = materialType;
     }
@@ -93,12 +98,13 @@ public class Materials : Item
 public class Clothes : Item
 {
     public string Size { get; set; }
+    public int Defence { get; set; }
 
-
-    public Clothes(string name, int quantity, string size)
-        : base(name, quantity, ItemType.Clothes)
+    public Clothes(int Id, string name, string Description, int quantity, string size, int defence)
+        : base(Id, name, Description, quantity, ItemType.Clothes)
     {
         Size = size;
+        Defence = defence;
     }
 
     public override void DisplayInfo()
