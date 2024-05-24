@@ -18,7 +18,7 @@ public class ItemsDB : MonoBehaviour
 
     }
     public void StartsItem() {
-        InGame.Add(new Clothes(-5,"Okulary","Nosisz na g³owie",1,"Staki d³ugi",5));
+        //InGame.Add(new Clothes(-5,,"Okulary","Nosisz na g³owie",1,"Staki d³ugi",5));
     }
 
 }
