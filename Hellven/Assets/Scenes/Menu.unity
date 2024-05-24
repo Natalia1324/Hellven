@@ -2273,6 +2273,7 @@ GameObject:
   - component: {fileID: 1028108782}
   - component: {fileID: 1028108784}
   - component: {fileID: 1028108783}
+  - component: {fileID: 1028108785}
   m_Layer: 5
   m_Name: Main Menu
   m_TagString: Untagged
@@ -2323,7 +2324,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: ed8d6ee56aecc4e4d8c5d49cac071c4c, type: 3}
+  m_Sprite: {fileID: -1332955517, guid: beffc237ccb691c4da0ad0317159c6e2, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2341,6 +2342,27 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1028108781}
   m_CullTransparentMesh: 1
+--- !u!95 &1028108785
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1028108781}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 2063e86794394ec40b8de2cc5d39c682, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1059932841
 GameObject:
   m_ObjectHideFlags: 0
@@ -3473,7 +3495,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2068976789
 RectTransform:
   m_ObjectHideFlags: 0
