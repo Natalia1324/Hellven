@@ -25,7 +25,7 @@ public class PlayerController : MonoBehaviour
     public Vector3 velocity;
     public Vector3 acceleration;
 
-
+    [SerializeField] private ParticleSystem test = default(ParticleSystem);
     private bool isAttacking;
 
     private Vector3 input;
@@ -46,8 +46,24 @@ public class PlayerController : MonoBehaviour
         //currentHP = maxHP;
         UpdateHealthUI();
     }
+    void ParticlePlay()
+    {
+        Vector3 newpos = new Vector3(transform.position.x, transform.position.y + 1, transform.position.z);
+        ParticleSystem newParticleSystem = Instantiate(test);
+        // Ustaw pozycję nowego systemu cząsteczek na pozycję tego obiektu
+        newParticleSystem.transform.position = newpos;
+        newParticleSystem.gameObject.layer = 0;
+
+        var particleRenderer = newParticleSystem.GetComponent<Renderer>();
+        particleRenderer.sortingOrder = 0;
+        particleRenderer.sortingLayerName = "Player";
+        // Uruchom animację cząsteczek
+        newParticleSystem.Play();
+        Destroy(newParticleSystem.gameObject, newParticleSystem.main.duration);
+    }
     void UpdateHealthUI()
     {
+
         UnityEngine.Debug.Log("HP is: " +  currentHP);
         healthText.text = "HP: " + currentHP + "/" + maxHP;
     }
@@ -74,9 +90,11 @@ public class PlayerController : MonoBehaviour
             acceleration = Vector3.zero;
         }
 
+
         if (Input.GetKey(KeyCode.Space))
         {
             StartCoroutine(Attack());
+            
         }
         else isAttacking = false;
 
@@ -116,21 +134,7 @@ public class PlayerController : MonoBehaviour
     {
         isAttacking = true;
 
-        // Włączenie animacji ataku
-        //animator.SetTrigger("Attack");
-
-        // Opóźnienie przed zadaniem obrażeń
         yield return new WaitForSeconds(attackDelay);
-
-        // Sprawdzenie kolizji z przeciwnikami
-        //Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers);
-
-        //// Zadanie obrażeń trafionym przeciwnikom
-        //foreach (Collider2D enemy in hitEnemies)
-        //{
-        //    Debug.Log("Trafiono: " + enemy.name);
-        //    enemy.GetComponent<EnemyController>().TakeDamage(attackDamage);
-        //}
 
         isAttacking = false;
     }

@@ -3453,7 +3453,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -36391699
   m_SortingLayer: 3
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 431011577, guid: a3e8275d6114a144aa912d81de7e6a97, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -3507,6 +3507,7 @@ MonoBehaviour:
   attackDelay: 3
   velocity: {x: 0, y: 0, z: 0}
   acceleration: {x: 0, y: 0, z: 0}
+  test: {fileID: 86689641679107130, guid: ecccb855dd87d3742803acad8d0f017a, type: 3}
   solidLayer:
     serializedVersion: 2
     m_Bits: 128
