@@ -15,7 +15,8 @@ public class eq : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {     
+    {
+        Debug.Log("E key was pressed.");
         if (Input.GetKeyDown(KeyCode.E))
         {
             EQ_UI.SetActive(!EQ_UI.activeInHierarchy);
