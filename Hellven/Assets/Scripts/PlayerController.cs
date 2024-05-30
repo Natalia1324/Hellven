@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
@@ -13,6 +14,7 @@ public class PlayerController : MonoBehaviour
     public float damping;
 
     public bool isMoving;
+    public bool isSprinting = false;
     //public Transform attackPoint;
     //public float attackRange = 0.5f;
     //public LayerMask enemyLayers;
@@ -35,7 +37,18 @@ public class PlayerController : MonoBehaviour
     public LayerMask solidLayer;
     //public LayerMask battleLayer;
 
-    public TextMeshProUGUI healthText;
+    public float sprintMultiplier = 20f;
+
+    private float stamina;
+    public float maxStamina = 100f;
+    public float staminaUsageRate = 10f;
+    public float staminaRecoveryRate = 5f;
+
+    private bool canSprint = true;
+
+    public Slider HPSlider;        
+    public Slider StaminaSlider;
+
     private void Awake()
     {
         animator = GetComponent<Animator>();
@@ -43,9 +56,25 @@ public class PlayerController : MonoBehaviour
     }
     private void Start()
     {
-        //currentHP = maxHP;
-        UpdateHealthUI();
+        currentHP = maxHP;
+        stamina = maxStamina;
+        InitializeSliders();
     }
+
+    void InitializeSliders()
+    {
+        HPSlider.maxValue = maxHP;
+        HPSlider.value = currentHP;
+        StaminaSlider.maxValue = maxStamina;
+        StaminaSlider.value = stamina;
+    }
+
+    void UpdateSliders()
+    {
+        HPSlider.value = currentHP;
+        StaminaSlider.value = stamina; 
+    }
+
     void ParticlePlay()
     {
         Vector3 newpos = new Vector3(transform.position.x, transform.position.y + 1, transform.position.z);
@@ -61,20 +90,29 @@ public class PlayerController : MonoBehaviour
         newParticleSystem.Play();
         Destroy(newParticleSystem.gameObject, newParticleSystem.main.duration);
     }
-    void UpdateHealthUI()
-    {
 
-        UnityEngine.Debug.Log("HP is: " +  currentHP);
-        healthText.text = "HP: " + currentHP + "/" + maxHP;
-    }
     private void Update()
     {
         input.x = Input.GetAxisRaw("Horizontal");
         input.y = Input.GetAxisRaw("Vertical");
         input.z = 0;
 
-        //Debug.Log(input.x + " " + input.y);
+        bool sprintInput = Input.GetKey(KeyCode.LeftShift);
+        if (sprintInput && stamina > 0 && canSprint)
+        {
+            isSprinting = true;
+        }
+        else
+        {
+            isSprinting = false;
+        }
+        //UnityEngine.Debug.Log("is sprinting is: " + isSprinting);
 
+        float currentSpeed = isSprinting ? moveSpeed * sprintMultiplier : 1;
+
+        //UnityEngine.Debug.Log("moveSpeed is: " + moveSpeed);
+        //UnityEngine.Debug.Log("sprintMultiplier is: " + sprintMultiplier);
+        //UnityEngine.Debug.Log("Current speed is: " + currentSpeed);
 
         if (input != Vector3.zero)
         {
@@ -84,10 +122,40 @@ public class PlayerController : MonoBehaviour
             acceleration = input * moveSpeed;
 
             isMoving = true;
+
+
+            if (isSprinting)
+            {
+
+                stamina -= staminaUsageRate * Time.deltaTime;
+                if (stamina <= 0)
+                {
+                    stamina = 0;
+                    canSprint = false;
+                }
+
+            }
+            else if (stamina < maxStamina)
+            {
+                stamina += staminaRecoveryRate * Time.deltaTime;
+                if (stamina > maxStamina) stamina = maxStamina;
+
+                if (stamina >= maxStamina * 0.2f)
+                {
+                    canSprint = true;
+                }
+
+            }
+            //UnityEngine.Debug.Log("Current stamina is: " + stamina);
         }
         else
         {
             acceleration = Vector3.zero;
+            if (stamina < maxStamina)
+            {
+                stamina += staminaRecoveryRate * Time.deltaTime;
+                if (stamina > maxStamina) stamina = maxStamina;
+            }
         }
 
 
@@ -108,7 +176,7 @@ public class PlayerController : MonoBehaviour
         if ( velocity.z < 0.02f && velocity.z > -0.02f ) velocity.z = 0;
         if ( velocity == Vector3.zero ) isMoving = false;
                 
-        transform.position += velocity * Time.deltaTime;
+        transform.position += velocity * currentSpeed * Time.deltaTime;
 
         // if (isWalkable(targetPos)) StartCoroutine(Move(targetPos));
 
@@ -116,6 +184,8 @@ public class PlayerController : MonoBehaviour
 
         animator.SetBool("isAttacking", isAttacking);
         animator.SetBool("isMoving", isMoving);
+
+        UpdateSliders();
     }
 
     //void Attack()
@@ -146,7 +216,6 @@ public class PlayerController : MonoBehaviour
         {
             Die();
         }
-        UpdateHealthUI();
     }
 
     void Die()

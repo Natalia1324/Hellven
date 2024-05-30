@@ -44,7 +44,7 @@ public class EnemyController : MonoBehaviour
     }
     void Die()
     {
-        Debug.Log("Enemy died!");
+        //Debug.Log("Enemy died!");
         ParticleSystem newParticleSystem = Instantiate(test);
         // Ustaw pozycję nowego systemu cząsteczek na pozycję tego obiektu
         newParticleSystem.transform.position = transform.position;
