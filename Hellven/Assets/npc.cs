@@ -17,7 +17,7 @@ public class npc : MonoBehaviour
    
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.E) && playerIsClose)
+        if(Input.GetKeyDown(KeyCode.P) && playerIsClose)
         {
 
             if (dialoguePanel.activeInHierarchy)

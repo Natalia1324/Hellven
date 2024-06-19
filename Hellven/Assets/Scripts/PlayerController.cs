@@ -12,9 +12,9 @@ public class PlayerController : MonoBehaviour
     public int currentHP;
     public float moveSpeed;
     public float damping;
-    public AudioSource audioSource1;
-    public AudioSource audioSource2;
-    public AudioSource audioSource3;
+    public AudioSource audioSourceSword;
+    public AudioSource audioSourceDash;
+    public AudioSource audioSourceSwing;
     public bool isMoving;
     public bool isSprinting = false;
     //public Transform attackPoint;
@@ -286,18 +286,18 @@ public class PlayerController : MonoBehaviour
     }
     public void PlaySwing()
     {
-        audioSource3.Play();
+        audioSourceSwing.Play();
     }
     public void PlaySword()
     {
-        audioSource1.Play();
+        audioSourceSword.Play();
     }
     public void PlayDash()
     {
-        audioSource2.Play();
+        audioSourceDash.Play();
     }
     public void StopDash()
     {
-        audioSource2.Stop();
+        audioSourceDash.Stop();
     }
 }
