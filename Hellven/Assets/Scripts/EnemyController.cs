@@ -22,12 +22,29 @@ public class EnemyController : MonoBehaviour
         if (currentHealth <= 0)
         {
             Die();
+
+            if (GameEventsManager.instance != null)
+            {
+                if (GameEventsManager.instance.miscEvents != null)
+                {
+                    GameEventsManager.instance.miscEvents.Killmonster();
+                }
+                else
+                {
+                    Debug.LogError("miscEvents jest null.");
+                }
+            }
+            else
+            {
+                Debug.LogError("GameEventsManager.instance jest null.");
+            }
         }
         else
         {
             StartCoroutine(FlashEnemyColor());
         }
     }
+
     IEnumerator FlashEnemyColor()
     {
         // Zapisz pierwotny kolor
@@ -44,6 +61,7 @@ public class EnemyController : MonoBehaviour
     }
     void Die()
     {
+        
         //Debug.Log("Enemy died!");
         ParticleSystem newParticleSystem = Instantiate(test);
         // Ustaw pozycję nowego systemu cząsteczek na pozycję tego obiektu

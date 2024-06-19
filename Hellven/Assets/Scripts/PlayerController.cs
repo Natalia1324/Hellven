@@ -12,7 +12,9 @@ public class PlayerController : MonoBehaviour
     public int currentHP;
     public float moveSpeed;
     public float damping;
-
+    public AudioSource audioSource1;
+    public AudioSource audioSource2;
+    public AudioSource audioSource3;
     public bool isMoving;
     public bool isSprinting = false;
     //public Transform attackPoint;
@@ -52,7 +54,6 @@ public class PlayerController : MonoBehaviour
     private void Awake()
     {
         animator = GetComponent<Animator>();
-        
     }
     private void Start()
     {
@@ -90,17 +91,25 @@ public class PlayerController : MonoBehaviour
         newParticleSystem.Play();
         Destroy(newParticleSystem.gameObject, newParticleSystem.main.duration);
     }
-
+    
     private void Update()
     {
         input.x = Input.GetAxisRaw("Horizontal");
         input.y = Input.GetAxisRaw("Vertical");
         input.z = 0;
-
+        if (Input.GetKeyDown(KeyCode.LeftShift))
+        {
+            PlayDash();
+        }
+        if (Input.GetKeyUp(KeyCode.LeftShift))
+        {
+            StopDash();
+        }
         bool sprintInput = Input.GetKey(KeyCode.LeftShift);
         if (sprintInput && stamina > 0 && canSprint)
         {
             isSprinting = true;
+            
         }
         else
         {
@@ -162,7 +171,6 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKey(KeyCode.Space))
         {
             StartCoroutine(Attack());
-            
         }
         else isAttacking = false;
 
@@ -203,9 +211,9 @@ public class PlayerController : MonoBehaviour
     IEnumerator Attack()
     {
         isAttacking = true;
-
-        yield return new WaitForSeconds(attackDelay);
-
+        {
+            yield return new WaitForSeconds(attackDelay);
+        }
         isAttacking = false;
     }
 
@@ -227,10 +235,16 @@ public class PlayerController : MonoBehaviour
     {
         // Sprawdzenie kolizji z przeciwnikami
         Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers);
-
+        
+        if (hitEnemies.Length == 0)
+        {
+            PlaySwing();
+            UnityEngine.Debug.Log("Nie trafiono żadnego przeciwnika.");
+        }
         // Zadanie obrażeń trafionym przeciwnikom
         foreach (Collider2D enemy in hitEnemies)
         {
+            PlaySword();
             UnityEngine.Debug.Log("Trafiono: " + enemy.name);
             enemy.GetComponent<EnemyController>().TakeDamage(attackDamage);
         }
@@ -269,5 +283,21 @@ public class PlayerController : MonoBehaviour
         }
         return true;
 
+    }
+    public void PlaySwing()
+    {
+        audioSource3.Play();
+    }
+    public void PlaySword()
+    {
+        audioSource1.Play();
+    }
+    public void PlayDash()
+    {
+        audioSource2.Play();
+    }
+    public void StopDash()
+    {
+        audioSource2.Stop();
     }
 }
