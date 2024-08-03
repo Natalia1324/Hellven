@@ -19,7 +19,7 @@ public class npc : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.P) && playerIsClose)
         {
-
+            Debug.Log("Jest P");
             if (dialoguePanel.activeInHierarchy)
             {
                 zeroText();
