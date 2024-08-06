@@ -15,8 +15,8 @@ TagManager:
   - SolidObjects
   - BattleZone
   - Enemies
-  - 
-  - 
+  - Player
+  - NPC
   - 
   - 
   - 
