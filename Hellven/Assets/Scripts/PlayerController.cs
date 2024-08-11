@@ -8,6 +8,8 @@ using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
+    public int money;
+
     public int maxHP;
     public int currentHP;
     public float moveSpeed;
