@@ -34,7 +34,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private ParticleSystem test = default(ParticleSystem);
     private bool isAttacking;
 
-    private Vector3 input;
+    public Vector3 input;
 
     private Animator animator;
 
