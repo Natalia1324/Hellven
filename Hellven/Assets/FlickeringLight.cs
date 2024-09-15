@@ -7,13 +7,14 @@ using UnityEngine.Rendering.Universal;
 
 public class FlickeringLight : MonoBehaviour
 {
-    public Light2D light2D; // Reference to the Light2D component
-    public float flickerSpeed = 1.0f; // Speed of flickering (affects the rate of change)
-    public float minIntensity = 0.5f; // Minimum intensity of the light
-    public float maxIntensity = 1.0f; // Maximum intensity of the light
-    public bool flickerColor = false; // Toggle color flickering
-    public Color minColor = Color.white; // Minimum color for flickering
-    public Color maxColor = Color.white; // Maximum color for flickering
+    public Light2D light2D;
+
+    public float flickerSpeed = 1.0f;
+    public float minIntensity = 0.5f;
+    public float maxIntensity = 1.0f;
+    public bool flickerColor = false;
+    public Color minColor = Color.white; 
+    public Color maxColor = Color.white; 
 
     private float timeCounter = 0.0f;
     private float intensityChangeTimer = 0.0f;
@@ -28,8 +29,6 @@ public class FlickeringLight : MonoBehaviour
             light2D = GetComponent<Light2D>();
         }
 
-
-        // Initialize change intervals
         intensityChangeInterval = UnityEngine.Random.Range(0.1f, 0.5f);
         if (flickerColor)
         {
@@ -41,10 +40,8 @@ public class FlickeringLight : MonoBehaviour
     {
         if (light2D == null) return;
 
-        // Update time counter based on flicker speed
         timeCounter += Time.deltaTime * flickerSpeed;
 
-        // Randomly update intensity
         intensityChangeTimer += Time.deltaTime;
         if (intensityChangeTimer >= intensityChangeInterval)
         {
@@ -54,7 +51,6 @@ public class FlickeringLight : MonoBehaviour
             light2D.intensity = intensity;
         }
 
-        // Randomly update color if enabled
         if (flickerColor)
         {
             colorChangeTimer += Time.deltaTime;
@@ -72,4 +68,26 @@ public class FlickeringLight : MonoBehaviour
             }
         }
     }
+
+    public void ApplyPreset(FlickeringLightPreset preset)
+    {
+        if (preset.flickerSpeed.HasValue)
+            flickerSpeed = preset.flickerSpeed.Value;
+
+        if (preset.minIntensity.HasValue)
+            minIntensity = preset.minIntensity.Value;
+
+        if (preset.maxIntensity.HasValue)
+            maxIntensity = preset.maxIntensity.Value;
+
+        if (preset.flickerColor.HasValue)
+            flickerColor = preset.flickerColor.Value;
+
+        if (preset.minColor.HasValue)
+            minColor = preset.minColor.Value;
+
+        if (preset.maxColor.HasValue)
+            maxColor = preset.maxColor.Value;
+    }
 }
+

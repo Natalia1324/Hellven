@@ -4,10 +4,11 @@ using UnityEngine.Rendering.Universal;
 
 public class LightFollower2D : MonoBehaviour
 {
-    public PlayerController playerController; // Reference to the PlayerController
-    public float rotationSpeed = 5f; // Speed at which the light rotates
+    public PlayerController playerController;
+    public float rotationSpeed = 5f; 
+    public float shiftDistance = 1f;    
 
-    private Light2D light2D; // Reference to the Light2D component
+    private Light2D light2D;
 
     private void Start()
     {
@@ -31,12 +32,15 @@ public class LightFollower2D : MonoBehaviour
 
         if (inputDirection != Vector2.zero)
         {
-            // Calculate the angle in degrees between the x-axis and the input direction vector
             float angle = Mathf.Atan2(inputDirection.y, inputDirection.x) * Mathf.Rad2Deg;
 
-            // Smoothly rotate the light to the new angle
-            Quaternion targetRotation = Quaternion.Euler(0, 0, angle - 90); // Adjust based on your light setup
+            Quaternion targetRotation = Quaternion.Euler(0, 0, angle - 90); 
             transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, Time.deltaTime * rotationSpeed);
+
+            Vector3 shift = inputDirection * shiftDistance;
+            transform.position = playerController.transform.position + shift;
         }
     }
+
+
 }

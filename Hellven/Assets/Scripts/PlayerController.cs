@@ -241,13 +241,13 @@ public class PlayerController : MonoBehaviour
         if (hitEnemies.Length == 0)
         {
             PlaySwing();
-            UnityEngine.Debug.Log("Nie trafiono żadnego przeciwnika.");
+            // UnityEngine.Debug.Log("Nie trafiono żadnego przeciwnika.");
         }
         // Zadanie obrażeń trafionym przeciwnikom
         foreach (Collider2D enemy in hitEnemies)
         {
             PlaySword();
-            UnityEngine.Debug.Log("Trafiono: " + enemy.name);
+            // UnityEngine.Debug.Log("Trafiono: " + enemy.name);
             enemy.GetComponent<EnemyController>().TakeDamage(attackDamage);
         }
     }
