@@ -93,12 +93,12 @@ public class PlayerController : MonoBehaviour
         newParticleSystem.Play();
         Destroy(newParticleSystem.gameObject, newParticleSystem.main.duration);
     }
-    
     private void Update()
     {
         input.x = Input.GetAxisRaw("Horizontal");
         input.y = Input.GetAxisRaw("Vertical");
         input.z = 0;
+
         if (Input.GetKeyDown(KeyCode.LeftShift))
         {
             PlayDash();
@@ -107,57 +107,73 @@ public class PlayerController : MonoBehaviour
         {
             StopDash();
         }
+
         bool sprintInput = Input.GetKey(KeyCode.LeftShift);
         if (sprintInput && stamina > 0 && canSprint)
         {
             isSprinting = true;
-            
         }
         else
         {
             isSprinting = false;
         }
-        //UnityEngine.Debug.Log("is sprinting is: " + isSprinting);
 
-        float currentSpeed = isSprinting ? moveSpeed * sprintMultiplier : 1;
-
-        //UnityEngine.Debug.Log("moveSpeed is: " + moveSpeed);
-        //UnityEngine.Debug.Log("sprintMultiplier is: " + sprintMultiplier);
-        //UnityEngine.Debug.Log("Current speed is: " + currentSpeed);
+        float currentSpeed = isSprinting ? moveSpeed * sprintMultiplier : moveSpeed;
 
         if (input != Vector3.zero)
         {
-            animator.SetFloat("MoveX", input.x);
-            animator.SetFloat("MoveY", input.y);
+            // Normalizowanie kierunku ruchu
+            Vector3 direction = input.normalized;
 
-            acceleration = input * moveSpeed;
+            // Pozycja docelowa, na którą zmierza postać
+            Vector3 targetPosition = transform.position + direction * currentSpeed * Time.deltaTime;
 
-            isMoving = true;
 
+            RaycastHit2D hit2 = Physics2D.Raycast(transform.position, direction, 2f, solidLayer);
 
-            if (isSprinting)
+            if (hit2.collider != null)
             {
-
-                stamina -= staminaUsageRate * Time.deltaTime;
-                if (stamina <= 0)
-                {
-                    stamina = 0;
-                    canSprint = false;
-                }
-
+                // Jeśli Raycast 2D trafia w coś
+                UnityEngine.Debug.Log("Wykryto kolizję z: " + hit2.collider.name);
             }
-            else if (stamina < maxStamina)
+
+
+            // Sprawdzanie kolizji
+            if (hit2.collider == null)
             {
-                stamina += staminaRecoveryRate * Time.deltaTime;
-                if (stamina > maxStamina) stamina = maxStamina;
+                // Jeśli nie ma kolizji, kontynuuj ruch
+                animator.SetFloat("MoveX", input.x);
+                animator.SetFloat("MoveY", input.y);
 
-                if (stamina >= maxStamina * 0.2f)
+                acceleration = direction * moveSpeed;
+                isMoving = true;
+
+                if (isSprinting)
                 {
-                    canSprint = true;
+                    stamina -= staminaUsageRate * Time.deltaTime;
+                    if (stamina <= 0)
+                    {
+                        stamina = 0;
+                        canSprint = false;
+                    }
                 }
+                else if (stamina < maxStamina)
+                {
+                    stamina += staminaRecoveryRate * Time.deltaTime;
+                    if (stamina > maxStamina) stamina = maxStamina;
 
+                    if (stamina >= maxStamina * 0.2f)
+                    {
+                        canSprint = true;
+                    }
+                }
             }
-            //UnityEngine.Debug.Log("Current stamina is: " + stamina);
+            else
+            {
+                // Zatrzymanie ruchu, jeśli Raycast wykryje kolizję
+                acceleration = Vector3.zero;
+                isMoving = false;
+            }
         }
         else
         {
@@ -169,28 +185,25 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-
         if (Input.GetKey(KeyCode.Space))
         {
             StartCoroutine(Attack());
         }
-        else isAttacking = false;
+        else
+        {
+            isAttacking = false;
+        }
 
-        //velocity = velocity * acceleration * Time.deltaTime * damping;
-        velocity.x = ( velocity.x + acceleration.x ) * damping;
-        velocity.y = ( velocity.y + acceleration.y ) * damping;
-        velocity.z = ( velocity.z + acceleration.z ) * damping;
+        velocity.x = (velocity.x + acceleration.x) * damping;
+        velocity.y = (velocity.y + acceleration.y) * damping;
+        velocity.z = (velocity.z + acceleration.z) * damping;
 
-        if ( velocity.x < 0.02f && velocity.x > -0.02f ) velocity.x = 0;
-        if ( velocity.y < 0.02f && velocity.y > -0.02f ) velocity.y = 0;
-        if ( velocity.z < 0.02f && velocity.z > -0.02f ) velocity.z = 0;
-        if ( velocity == Vector3.zero ) isMoving = false;
-                
+        if (velocity.x < 0.02f && velocity.x > -0.02f) velocity.x = 0;
+        if (velocity.y < 0.02f && velocity.y > -0.02f) velocity.y = 0;
+        if (velocity.z < 0.02f && velocity.z > -0.02f) velocity.z = 0;
+        if (velocity == Vector3.zero) isMoving = false;
+
         transform.position += velocity * currentSpeed * Time.deltaTime;
-
-        // if (isWalkable(targetPos)) StartCoroutine(Move(targetPos));
-
-        //Debug.Log("Attack is: "+ isAttacking);
 
         animator.SetBool("isAttacking", isAttacking);
         animator.SetBool("isMoving", isMoving);
@@ -272,8 +285,6 @@ public class PlayerController : MonoBehaviour
         transform.position = targetPos;
 
         isMoving = false;
-
-        
 
     }
 
