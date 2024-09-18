@@ -28,7 +28,7 @@ public class KillMonsterStep : QuestStep
         }
     }
 
-    private void MonsterKilled()
+    public void MonsterKilled()
     {
         if (KilledMonsters < MonstersToComplete)
         {

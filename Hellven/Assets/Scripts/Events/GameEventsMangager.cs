@@ -10,7 +10,6 @@ public class GameEventsManager : MonoBehaviour
     public GoldEvents goldEvents;
     public MiscEvents miscEvents;
     public QuestEvents questEvents;
-
     private void Awake()
     {
         if (instance != null && instance != this)

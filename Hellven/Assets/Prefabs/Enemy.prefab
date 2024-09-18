@@ -103,10 +103,10 @@ BoxCollider2D:
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 7103
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 1024
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
@@ -120,7 +120,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -178,11 +178,13 @@ MonoBehaviour:
   lvl: 1
   enemyName: Glutek
   enemyTitle: 
+  KillStep: {fileID: 0}
   maxHealth: 20
   currentHealth: 0
   test: {fileID: 7645488062627422581, guid: 025f72c01a74f9d4f8e70b583650eea2, type: 3}
   hitColorDuration: 0.3
   hitColor: {r: 1, g: 0.39811313, b: 0.39811313, a: 1}
+  separationForce: 10
   jumpForce: 5
   knockbackIntencity: 5
   chargeSpeed: 7

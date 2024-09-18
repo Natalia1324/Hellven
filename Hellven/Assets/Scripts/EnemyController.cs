@@ -9,10 +9,10 @@ public class EnemyController : MonoBehaviour
     public int lvl = 1;
     public string enemyName = "Glutek";
     public string enemyTitle = "";
-
+    public KillMonsterStep KillStep;
     public int maxHealth;
     public int currentHealth;
-
+    private bool dead = false;
     [SerializeField] private ParticleSystem test = default(ParticleSystem);
 
     public float hitColorDuration = 0.5f;
@@ -210,8 +210,9 @@ public class EnemyController : MonoBehaviour
     public void TakeDamage(int damage)
     {
         currentHealth -= damage;
-        if (currentHealth <= 0)
+        if (currentHealth <= 0 && !dead)
         {
+            dead = true;
             Die();
         }
         else
@@ -260,7 +261,8 @@ public class EnemyController : MonoBehaviour
         particleRenderer.sortingOrder = 1;
         newParticleSystem.Play();
         Destroy(newParticleSystem.gameObject, newParticleSystem.main.duration);
-
+        GameEventsManager.instance.miscEvents.Killmonster();
+        Debug.Log("Kilnąłem");
         despawn();
     }
 
