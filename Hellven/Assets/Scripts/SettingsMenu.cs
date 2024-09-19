@@ -8,9 +8,9 @@ using UnityEngine.UI;
 public class SettingsMenu : MonoBehaviour
 {
     public AudioMixer audioMixer;
-
+    public GameObject Option_UI;
     public Dropdown resolutionDropdown;
-
+    private bool open;
     Resolution[] resolutions;
 
     public void Start()
@@ -57,15 +57,16 @@ public class SettingsMenu : MonoBehaviour
         Debug.Log("SetFullscreen: " + isFullscreen);
         //Screen.fullScreen= isFullscreen;
     }
+    
     //// Start is called before the first frame update
     //void Start()
     //{
-        
+
     //}
 
     //// Update is called once per frame
     //void Update()
     //{
-        
+
     //}
 }

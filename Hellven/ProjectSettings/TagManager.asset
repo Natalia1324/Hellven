@@ -15,9 +15,9 @@ TagManager:
   - SolidObjects
   - BattleZone
   - Enemies
-  - 
-  - 
-  - 
+  - Player
+  - NPC
+  - Enemies Shadows
   - 
   - 
   - 
@@ -41,12 +41,18 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
-  - name: First
+  - name: Enviroment
     uniqueID: 1890882863
+    locked: 0
+  - name: Player
+    uniqueID: 4258575597
     locked: 0
   - name: Enemies
     uniqueID: 4081836431
     locked: 0
-  - name: Player
-    uniqueID: 4258575597
+  - name: NPC
+    uniqueID: 711370271
+    locked: 0
+  - name: Enemy Shadows
+    uniqueID: 2298288023
     locked: 0

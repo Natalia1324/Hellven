@@ -16,16 +16,26 @@ public class Item
 
     public ItemType Type { get; set; }
 
+    public int Id { get; set; }
     // Common properties that all items might have
+    public Texture2D Tekstura;
     public string Name { get; set; }
+    public string Description { get; set; }
+    // Iloœæ
     public int Quantity { get; set; }
+    //jadalnosc
+    public bool Eatable { get; set; }
 
     // Constructor
-    public Item(string name, int quantity, ItemType type)
+    public Item(int Id, Texture2D texture, string name, string Description, int quantity, ItemType type, bool eatable)
     {
-        Name = name;
-        Quantity = quantity;
-        Type = type;
+        this.Id = Id;
+        this.Tekstura = texture;
+        this.Name = name;
+        this.Description = Description;
+        this.Quantity = quantity;
+        this.Type = type;
+        this.Eatable = eatable;
     }
 
     // Method to display item info
@@ -40,8 +50,8 @@ public class Food : Item
 {
     public int Calories { get; set; }
 
-    public Food(string name, int quantity, int calories)
-        : base(name, quantity, ItemType.Food)
+    public Food(int Id, Texture2D texture, string name, string Description, int quantity, int calories, bool eatable)
+        : base(Id, texture, name, Description, quantity,  ItemType.Food, eatable)
     {
         Calories = calories;
     }
@@ -58,8 +68,8 @@ public class Weapon : Item
 {
     public int Damage { get; set; }
 
-    public Weapon(string name, int quantity, int damage)
-        : base(name, quantity, ItemType.Weapon)
+    public Weapon(int Id, Texture2D texture, string name, string Description, int quantity, int damage, bool eatable)
+        : base(Id, texture, name, Description, quantity, ItemType.Weapon, eatable)
     {
         Damage = damage;
     }
@@ -76,8 +86,8 @@ public class Materials : Item
 {
     public string MaterialType { get; set; }
 
-    public Materials(string name, int quantity, string materialType)
-        : base(name, quantity, ItemType.Materials)
+    public Materials(int Id, Texture2D texture, string name, string Description, int quantity, string materialType, bool eatable)
+        : base(Id, texture, name, Description, quantity, ItemType.Materials, eatable)
     {
         MaterialType = materialType;
     }
@@ -93,12 +103,13 @@ public class Materials : Item
 public class Clothes : Item
 {
     public string Size { get; set; }
+    public int Defence { get; set; }
 
-
-    public Clothes(string name, int quantity, string size)
-        : base(name, quantity, ItemType.Clothes)
+    public Clothes(int Id, Texture2D texture, string name, string Description, int quantity, string size, int defence, bool eatable)
+        : base(Id, texture, name, Description, quantity, ItemType.Clothes, eatable)
     {
         Size = size;
+        Defence = defence;
     }
 
     public override void DisplayInfo()
